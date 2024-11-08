@@ -22,6 +22,10 @@ class Property(ABC):
     def calculate_tax():
         pass
 
+    @abstractmethod
+    def __str__():
+        pass
+
 class Estate(Property):
     def __init__(self, locality, estate_type, area):
         super().__init__(locality)
@@ -47,7 +51,7 @@ class Residence(Property):
         self.commercial = commercial
 
     def calculate_tax(self):
-        if self.commercial == "False":
+        if self.commercial == False:
             return math.ceil(self.area * self.locality.locality_coefficient * 15)
         else:
             return math.ceil(self.area * self.locality.locality_coefficient * 15 * 2)
@@ -80,8 +84,8 @@ class TaxReport:
 lokalita1 = Locality("Manětín", 0.8)
 lokalita2 = Locality("Brno", 3)
 pozemek = Estate(lokalita1, "land", 900)
-dum = Residence(lokalita1, 120, "False")
-kancelar = Residence(lokalita2, 90, "True")
+dum = Residence(lokalita1, 120, False)
+kancelar = Residence(lokalita2, 90, True)
 danove_priznani = TaxReport("Pavel Novák")
 
 danove_priznani.add_property(pozemek)
